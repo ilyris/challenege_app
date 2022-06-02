@@ -1,0 +1,14 @@
+.Pagination {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+}
+.Pagination > span {
+  background-color: #393939;
+  padding: 14px;
+  color: #fff;
+  border-radius: 3px;
+  font-size: 20px;
+  margin: 0 10px;
+}

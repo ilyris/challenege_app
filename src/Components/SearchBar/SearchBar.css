@@ -1,0 +1,15 @@
+.SearchBar {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    width: fit-content;
+    margin: 50px auto;
+}
+
+.SearchBar h2 {
+    margin: 0;
+    font-size: 30px
+}
+.SearchBar > div  {
+    margin: 0 20px;
+}

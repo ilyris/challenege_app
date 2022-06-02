@@ -1,0 +1,26 @@
+.FoodCard {
+  flex: 1 0 200px;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 0px 0px 12px 1px #00000045;
+  padding: 20px;
+}
+.FoodCard > p span {
+  font-weight: bold;
+  margin-right: 5px;
+}
+.FoodCard ul {
+  text-align: left;
+  padding: 0;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 3px;
+}
+.FoodCard ul li {
+  list-style: none;
+  font-size: 0.9rem;
+  padding: 7px;
+  background-color: rgb(57, 57, 57);
+  border-radius: 5px;
+  color: #fff;
+}

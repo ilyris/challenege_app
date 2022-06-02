@@ -1,0 +1,12 @@
+.Home {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 15px;
+}
+
+.Home h2 {
+  text-align: center;
+  margin: 300px auto;
+  font-size: 75px;
+  transform: rotate(-20deg);
+}
