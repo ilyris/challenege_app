@@ -21,24 +21,30 @@ import { productCall } from "../../helpers/api/productCall";
 
 export default function Home() {
   const dispatch = useAppDispatch();
-  const [hasRan, setHasRan] = useState<boolean>(false);
 
   // Grab recipes to display some by default
   const { recipes } = useAppSelector((state) => state.rootReducer.recipes);
 
   // Only run on inital render of homepage.
   useEffect(() => {
-    const response = productCall("", 10, 0);
-    response
-      .then((result) => {
-        !hasRan && setHasRan(true);
-        dispatch(setNumOfPage(result.data.nbPages));
-        dispatch(setRecipes(result.data.hits));
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, [hasRan, dispatch]);
+    let hasRan = false;
+    if (!hasRan) {
+      const response = productCall("", 10, 0);
+      response
+        .then((result) => {
+          console.log("get data");
+
+          dispatch(setNumOfPage(result.data.nbPages));
+          dispatch(setRecipes(result.data.hits));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+    return () => {
+      hasRan = true;
+    };
+  }, [dispatch]);
 
   return (
     <>
