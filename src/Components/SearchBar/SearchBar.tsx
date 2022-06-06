@@ -34,15 +34,16 @@ export default function SearchBar() {
     maxProducts: 10,
   });
 
-  const handleClick = () => {
-    const response = productCall(formData.product, formData.maxProducts, 0);
-    response
-      .then((result) => {
-        const { nbPages, hits } = result.data;
-        dispatch(setNumOfPage(nbPages));
-        dispatch(setRecipes(hits));
-      })
-      .catch((err) => console.log(err));
+  const handleClick = async () => {
+    const response = await productCall(
+      formData.product,
+      formData.maxProducts,
+      0
+    );
+    const { nbPages, hits } = response.data;
+    dispatch(setNumOfPage(nbPages));
+    dispatch(setRecipes(hits));
+
     dispatch(setPage(0));
     dispatch(setFormState(formData));
   };

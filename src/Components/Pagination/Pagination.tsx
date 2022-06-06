@@ -1,5 +1,5 @@
 // libs
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Button } from "@mui/material";
 
 // redux
@@ -20,33 +20,29 @@ export default function Pagination() {
   const { formData, page } = useAppSelector(
     (state) => state.rootReducer.searchInfo
   );
-  const [pageNum, setPageNum] = useState<number>(page);
 
   const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    let productPage = page;
+
     // Update our page-number state locally
-    e.currentTarget.name === "prev"
-      ? await setPageNum(page - 1)
-      : await setPageNum(page + 1);
+    if (e.currentTarget.name === "prev") {
+      productPage = page - 1;
+    } else {
+      productPage = page + 1;
+    }
 
     // invoke an api call with the updated page numnber
-    const response = productCall(
+    const response = await productCall(
       formData.product,
       formData.maxProducts,
-      pageNum
+      productPage
     );
-    response
-      .then((result) => {
-        const { nbPages, hits } = result.data;
-        // dispatch the recipes & how many pages there are.
-        dispatch(setNumOfPage(nbPages));
-        dispatch(setRecipes(hits));
-      })
-      .catch((err) => console.log(err));
+    const { nbPages, hits } = response.data;
+    // dispatch the recipes & how many pages there are.
+    dispatch(setNumOfPage(nbPages));
+    dispatch(setRecipes(hits));
+    dispatch(setPage(productPage));
   };
-
-  useEffect(() => {
-    dispatch(setPage(pageNum));
-  }, [pageNum, dispatch]);
 
   return (
     <div className="Pagination">

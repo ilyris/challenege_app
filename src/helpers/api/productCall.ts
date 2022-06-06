@@ -1,11 +1,11 @@
 import axios from "axios";
 
-export const productCall = async (
+export const productCall = (
   value: string,
   maxProducts: number,
   page: number
 ) => {
-  const result = await axios.post(
+  const result = axios.post(
     `${process.env.REACT_APP_BASE_URL}/${process.env.REACT_APP_URL_PATH}?x-algolia-application-id=${process.env.REACT_APP_ID}&x-algolia-api-key=${process.env.REACT_APP_API_KEY}`,
     { query: value, hitsPerPage: maxProducts, page }
   );

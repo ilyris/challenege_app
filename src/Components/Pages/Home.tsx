@@ -1,5 +1,5 @@
 // libs
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks/hooks";
 
 // redux
@@ -27,23 +27,17 @@ export default function Home() {
 
   // Only run on inital render of homepage.
   useEffect(() => {
-    let hasRan = false;
-    if (!hasRan) {
-      const response = productCall("", 10, 0);
-      response
-        .then((result) => {
-          console.log("get data");
+    const response = productCall("", 10, 0);
+    response
+      .then((result) => {
+        console.log("get data");
 
-          dispatch(setNumOfPage(result.data.nbPages));
-          dispatch(setRecipes(result.data.hits));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-    return () => {
-      hasRan = true;
-    };
+        dispatch(setNumOfPage(result.data.nbPages));
+        dispatch(setRecipes(result.data.hits));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }, [dispatch]);
 
   return (
